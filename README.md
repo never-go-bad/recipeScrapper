@@ -1,3 +1,23 @@
+# Endpoints 
+
+### [GET] https://gentle-forest-65806.herokuapp.com/recipes/search?search=<search_term>
+Returns an array of recipes
+
+```
+[
+  {
+    "rating": Float - A number in the [0.0,4.0]. May be absent,
+    "image": String - A URL to an image of the recipe. May be absent,
+    "name": String - the name of the recipe ,
+    "id": String - an id to retrive the recipe details
+  
+  },
+  ...
+
+]
+````
+
+
 # python-getting-started
 
 A barebones Python app, which can easily be deployed to Heroku.
