@@ -44,9 +44,13 @@ def search(request):
 			obj["rating"] = float(rating[:rating.index('/')])
 		items.append(obj)
 
-	json_string = json.dumps(items, indent=4)
+	recipeObj = {"recipes" : items}
+
+	json_string = json.dumps(recipeObj, indent=4)
 
 	return HttpResponse(json_string, content_type="application/json; charset=utf-8")
+
+
 
 @require_GET
 def recipe(request, path):
