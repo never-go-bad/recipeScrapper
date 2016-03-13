@@ -44,13 +44,9 @@ def search(request):
 			obj["rating"] = float(rating[:rating.index('/')])
 		items.append(obj)
 
-	recipeObj = {"recipes" : items, "hasMore" : (soup.find("div", id="bNext") is not None)}
-
-	json_string = json.dumps(recipeObj, indent=4)
+	json_string = json.dumps(items, indent=4)
 
 	return HttpResponse(json_string, content_type="application/json; charset=utf-8")
-
-
 
 @require_GET
 def recipe(request, path):
