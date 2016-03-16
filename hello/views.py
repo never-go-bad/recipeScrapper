@@ -57,7 +57,7 @@ def generateServingsAndTime(recipe):
 			if "servings" in recipe: html += "<b>Servings:</b> %s<br/>" % recipe["servings"]
 			if "activeTime" in recipe: html += "<b>Active Time:</b> %s<br/>" % recipe["activeTime"]
 			if "totalTime" in recipe: html += "<b>Total Time:</b> %s<br/>" % recipe["totalTime"]
-		html += "</div>"
+			html += "</div>"
 		return html
 
 def generateIngredients(recipe):
