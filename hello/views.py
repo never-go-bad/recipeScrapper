@@ -51,6 +51,36 @@ def search(request):
 	return HttpResponse(json_string, content_type="application/json; charset=utf-8")
 
 
+def generateServingsAndTime(recipe): 
+		if "servings" in recipe or "activeTime" in recipe or "totalTime":
+			html = "<H1 style=\"font-family:Helvetica; font-weight: lighter\">SERVINGS & COOKING TIME</H1><div style=\"font-family:Helvetica; font-size: 12pt\">"
+			if "servings" in recipe: html += "<b>Servings:</b> %s<br/>" % recipe["servings"]
+			if "activeTime" in recipe: html += "<b>Active Time:</b> %s<br/>" % recipe["activeTime"]
+			if "totalTime" in recipe: html += "<b>Total Time:</b> %s<br/>" % recipe["totalTime"]
+		html += "</div>"
+		return html
+
+def generateIngredients(recipe):
+	html = "<br/><br/><H1 style=\"font-family:Helvetica; font-weight: lighter\">INGREDIENTS</H1><div style=\"font-family:Helvetica; font-size: 12pt\">"
+	for group in recipe["ingredientGroups"]:
+		if  "groupName" in group: html +="<br/><strong> %s </strong>" % group["groupName"]
+		html +="<ul>"
+		for ingredient in group["ingredients"]:
+			html += "<li>%s</li>" % ingredient
+		html += "</ul>"
+	html += "</div>"
+	return html
+
+def generateSteps(recipe):
+	html = "<br/><br/><H1 style=\"font-family:Helvetica; font-weight: lighter\">PREPARATION STEPS</H1><div style=\"font-family:Helvetica; font-size: 12pt\">"
+	for group in recipe["preparationStepGroups"]:
+		if  "groupName" in group: html +="<br/><strong> %s </strong>" % group["groupName"]
+		html +="<ul>"
+		for ingredient in group["steps"]:
+			html += "<li>%s</li>" % ingredient
+		html += "</ul>"
+	html += "</div>"
+	return html
 
 @require_GET
 def recipe(request, path):
@@ -97,8 +127,9 @@ def recipe(request, path):
 	if chefNotes is not None:
 		recipe["chefNotes"] = list(chefNotes.strings)
 
+	recipe["html"]  = generateServingsAndTime(recipe) + generateIngredients(recipe) + generateSteps(recipe)
+
 	json_string = json.dumps(recipe, indent=4)
 
 	return HttpResponse(json_string, content_type="application/json; charset=utf-8")
-
 
