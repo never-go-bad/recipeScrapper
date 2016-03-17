@@ -53,7 +53,7 @@ def search(request):
 
 def generateServingsAndTime(recipe): 
 		if "servings" in recipe or "activeTime" in recipe or "totalTime":
-			html = "<H1 style=\"font-family:Helvetica; font-weight: lighter\">SERVINGS & COOKING TIME</H1><div style=\"font-family:Helvetica; font-size: 12pt\">"
+			html = "<H1 style=\"font-family:Helvetica; font-weight: lighter; background-color: darkgray \">SERVINGS & COOKING TIME</H1><div style=\"font-family:Helvetica; font-size: 12pt\">"
 			if "servings" in recipe: html += "<b>Servings:</b> %s<br/>" % recipe["servings"]
 			if "activeTime" in recipe: html += "<b>Active Time:</b> %s<br/>" % recipe["activeTime"]
 			if "totalTime" in recipe: html += "<b>Total Time:</b> %s<br/>" % recipe["totalTime"]
