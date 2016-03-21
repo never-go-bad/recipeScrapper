@@ -61,7 +61,7 @@ def generateServingsAndTime(recipe):
 		return html
 
 def generateIngredients(recipe):
-	html = "<br/><br/><H1 style=\"font-family:Helvetica; font-weight: lighter\">INGREDIENTS</H1><div style=\"font-family:Helvetica; font-size: 12pt\">"
+	html = "<div style=\"font-family:Helvetica; font-size: 12pt\">"
 	for group in recipe["ingredientGroups"]:
 		if  "groupName" in group: html +="<br/><strong> %s </strong>" % group["groupName"]
 		html +="<ul>"
@@ -72,7 +72,7 @@ def generateIngredients(recipe):
 	return html
 
 def generateSteps(recipe):
-	html = "<br/><br/><H1 style=\"font-family:Helvetica; font-weight: lighter\">PREPARATION STEPS</H1><div style=\"font-family:Helvetica; font-size: 12pt\">"
+	html = "<div style=\"font-family:Helvetica; font-size: 12pt\">"
 	for group in recipe["preparationStepGroups"]:
 		if  "groupName" in group: html +="<br/><strong> %s </strong>" % group["groupName"]
 		html +="<ul>"
@@ -127,8 +127,9 @@ def recipe(request, path):
 	if chefNotes is not None:
 		recipe["chefNotes"] = list(chefNotes.strings)
 
-	recipe["html"]  = generateIngredients(recipe) + generateSteps(recipe)
 	recipe["servingsHtml"]  =  generateServingsAndTime(recipe)
+	recipe["ingredientsHtml"] = generateIngredients(recipe) 
+	recipe["stepsHtml"] = generateSteps(recipe)
 
 	json_string = json.dumps(recipe, indent=4)
 
