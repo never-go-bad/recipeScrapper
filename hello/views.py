@@ -53,7 +53,7 @@ def search(request):
 
 def generateServingsAndTime(recipe): 
 		if "servings" in recipe or "activeTime" in recipe or "totalTime":
-			html = "<H1 style=\"font-family:Helvetica; font-weight: lighter; background-color: darkgray; padding: 30px; font-size: 14pt\">SERVINGS & COOKING TIME</H1><div style=\"font-family:Helvetica; font-size: 12pt\">"
+			html = "<div style=\"font-family:Helvetica; font-size: 12pt\">"
 			if "servings" in recipe: html += "<b>Servings:</b> %s<br/>" % recipe["servings"]
 			if "activeTime" in recipe: html += "<b>Active Time:</b> %s<br/>" % recipe["activeTime"]
 			if "totalTime" in recipe: html += "<b>Total Time:</b> %s<br/>" % recipe["totalTime"]
@@ -127,8 +127,8 @@ def recipe(request, path):
 	if chefNotes is not None:
 		recipe["chefNotes"] = list(chefNotes.strings)
 
-	recipe["html"]  = generateServingsAndTime(recipe) + generateIngredients(recipe) + generateSteps(recipe)
-
+	recipe["html"]  = generateServingsAndTime(recipe) + generateIngredients(recipe) + generateSteps(recipe
+	recipe["servingsHtml"] = generateServingsAndTime(recipe)
 	json_string = json.dumps(recipe, indent=4)
 
 	return HttpResponse(json_string, content_type="application/json; charset=utf-8")
