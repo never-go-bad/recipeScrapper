@@ -4,6 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 import hello.views
+import hello.service
 
 # Examples:
 # url(r'^$', 'gettingstarted.views.home', name='home'),
@@ -15,4 +16,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^recipes$', hello.views.search),
     url(r'^recipe/(.*)$', hello.views.recipe),
+    url(r'^v2/recipes$', hello.service.search),
 ]
